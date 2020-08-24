@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get "/dashboard" => "users#index"
+  get "profile/:user_name" => "users#profile", as: :profile
 
   resources :posts, only: [:new, :create, :show]
 
