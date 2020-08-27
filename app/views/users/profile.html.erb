@@ -6,9 +6,22 @@
         <div class="col-8 text-left"> 
             <h1><%= @user.full_name %></h1>
             <%= link_to "Edit Page", edit_user_registration_path, class: "btn btn-secondary" %>
-            <div class="profile-status"><%= @user.posts.count %> posts</div>
-            <div class="profile-status"><%= @user.total_followers %> followers</div>
-            <div class="profile-status"><%= @user.total_following %> following</div>
+            <div class="profile-stats"><%= @user.posts.count %> posts</div>
+            <div class="profile-stats"><%= @user.total_followers %> followers</div>
+            <div class="profile-stats"><%= @user.total_following %> following</div>
+
+            <p><%= @user.full_name %></p>
+            <%= simple_format @user.description %>
+            <p><%= link_to @user.website if @user.website.present? %></p>
         </div>
     </div>
+
+<div class="row">
+    <%= @posts.each do |post|%>
+        <div class="col-4">
+            <div class="insta-post">
+                <%= image_tag post.image.url, class: "img img-fluid" %>
+            </div>
+        </div>
+    <% end %>
 </div>

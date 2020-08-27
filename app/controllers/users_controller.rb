@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     end
  
     def profile
+        @posts = @user.posts.active
     end
 
     def set_user
