@@ -5,21 +5,41 @@
             <% @posts.each do |post| %>
                 <div class="insta-post">
                     <div class="post-meta">
-                        <%= @post.user.user_name %>
+                        <%= link_to image_tag(post.user.image.thumb.url, class: "imag-rounded"), profile_path(post.user.user_name) %>
+                        <%= link_to post.user.user_name, profile_path(post.user.user_name), class: "text-dark" %>
                     </div>
 
                     <%= image_tag post.image.url, class: "img img-fluid" %>
+
+                  
+                    <div class="post-details">
+                        <div class="post-actions">
+                            <i class="fa fa-heart fa-2x post-like" data-id="<%= post.id %>"></i>
+                            <i class="fa fa-comment fa-2x post-comment"></i>
+                        </div>
+
+                        <p><strong><%= post.total_likes %> Likes</strong></p>
+                        <p><strong><%= link_to post.user.user_name, profile_path(post.user.user_name), class: "text-dark" %></strong></p>
+                        
+                        <%= simple_format post.description%>
+                        <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
+                    </div>
                 </div>
             <% end %>
         </div>
 
         <div class="col-4">
             <div class="user-summary">
-                <p><strong><%= current_user.user_name %></strong></p>
-                <%= current_user.full_name %>
+                <p>
+                    <%= link_to image_tag(current_user.image.thumb.url, class: "imag-rounded"), profile_path(current_user.user_name) %>
+                    <strong><%= current_user.user_name %></strong>
+                </p>
+
+                <p><%= current_user.full_name %></p>
             </div>
             <div class="follower-suggestions">
-                
+                <%= link_to "View All",  "#", class: "float-right text-dark" %>
+                <p class="text-muted"><strong>Suggestions for you</strong></p>
             </div>
         </div>
     </div>
