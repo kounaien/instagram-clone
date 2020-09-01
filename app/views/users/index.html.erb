@@ -5,7 +5,7 @@
             <% @posts.each do |post| %>
                 <div class="insta-post">
                     <div class="post-meta">
-                        <%= link_to image_tag(post.user.image.thumb.url, class: "imag-rounded"), profile_path(post.user.user_name) %>
+                            <%= link_to profile_picture(post.user, 25), profile_path(post.user.user_name), class: "image-rounded" %>
                         <%= link_to post.user.user_name, profile_path(post.user.user_name), class: "text-dark" %>
                     </div>
 
@@ -14,12 +14,12 @@
                   
                     <div class="post-details">
                         <div class="post-actions">
-                            <i class="fa fa-heart fa-2x post-like" data-id="<%= post.id %>"></i>
+                            <i class="fa fa-heart fa-2x like-<%= post.id %> <%= 'active' if post_liked_by_user?(post.id) %> post-like" data-id="<%= post.id %>"></i>
                             <i class="fa fa-comment fa-2x post-comment"></i>
                         </div>
 
-                        <p><strong><%= post.total_likes %> Likes</strong></p>
-                        <p><strong><%= link_to post.user.user_name, profile_path(post.user.user_name), class: "text-dark" %></strong></p>
+                        <p><strong id="post-<%= post.id %>-likes"><%= post.total_likes_count %> Likes</strong></p>
+                        <p><strong id="post-<%= post.id %>-comments"><%= link_to post.user.user_name, profile_path(post.user.user_name), class: "text-dark" %></strong></p>
                         
                         <%= simple_format post.description%>
                         <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
@@ -31,7 +31,7 @@
         <div class="col-4">
             <div class="user-summary">
                 <p>
-                    <%= link_to image_tag(current_user.image.thumb.url, class: "imag-rounded"), profile_path(current_user.user_name) %>
+                    <%= link_to profile_picture(current_user, 25), profile_path(current_user.user_name), class: "image-rounded" %>
                     <strong><%= current_user.user_name %></strong>
                 </p>
 
@@ -40,6 +40,7 @@
             <div class="follower-suggestions">
                 <%= link_to "View All",  "#", class: "float-right text-dark" %>
                 <p class="text-muted"><strong>Suggestions for you</strong></p>
+                <%= render 'users/follower_suggestions' %>
             </div>
         </div>
     </div>

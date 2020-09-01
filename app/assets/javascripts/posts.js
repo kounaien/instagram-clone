@@ -5,10 +5,10 @@ $(function () {
         var post_id = $(this).data("id");
 
         $.ajax({
-            url: "/posts/like/" + post_id,
+            url: "/post/like/" + post_id,
             method: "GET"
         }).done(function(response){
             console.log(response);
         })
-    })
+    })  
 })

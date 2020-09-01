@@ -25,6 +25,10 @@ body{
 }
 
 .profile-stats{
-    width: 120px;
-    float: left;
+    max-width: 360px;
+    margin-bottom: 30px;
+}
+
+.col-4.profile-img img {
+    border-radius: 50%;
 }
