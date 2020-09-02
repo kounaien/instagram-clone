@@ -5,9 +5,6 @@ class Post < ApplicationRecord
     scope :active, -> { where active: true }
     before_create :set_active
 
-    def total_likes
-        0
-    end
 
     private
     def set_active
@@ -17,4 +14,5 @@ class Post < ApplicationRecord
     belongs_to :user
 
     has_many :likes
+    has_many :comments
 end
