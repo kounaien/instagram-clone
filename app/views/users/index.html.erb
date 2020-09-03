@@ -22,7 +22,10 @@
                         <p><strong id="post-<%= post.id %>-comments"><%= link_to post.user.user_name, profile_path(post.user.user_name), class: "text-dark" %></strong></p>
                         
                         <%= simple_format post.description%>
+
                         <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
+
+                        <%= render partial: "posts/comments", locals: { post: post } %>
                     </div>
                     <div class="comment-box">
                         <%= form_for @comment do |f| %>
@@ -41,10 +44,13 @@
 
         <div class="col-4">
             <div class="user-summary">
-                <p>
-                    <%= link_to profile_picture(current_user, 25), profile_path(current_user.user_name), class: "image-rounded" %>
-                    <strong><%= current_user.user_name %></strong>
-                </p>
+                <div class="m-0">
+                    <p>
+                        <%= link_to profile_picture(current_user, 25), profile_path(current_user.user_name), class: "image-rounded float-left m-r-10" %>
+                        <strong><%= current_user.user_name %></strong><br />
+                        <%= current_user.full_name %>
+                    </p>
+                </div>
 
                 <p><%= current_user.full_name %></p>
             </div>
