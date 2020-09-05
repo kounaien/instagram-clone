@@ -1,6 +1,10 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 $(function () {
+    $("#post-comment").on("click", function() {
+        $("#comment_comment").focus();
+    });
+
     $(".post-like").on("click", function() {
         var post_id = $(this).data("id");
 

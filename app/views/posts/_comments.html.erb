@@ -1,6 +1,8 @@
-<% post.comments.each do |comment| %>
+<% comments.each do |comment| %>
     <div class="comment"> 
-        <strong><%= comment.user.user_name %></strong>
+        <%= link_to profile_picture(comment.user, 25), profile_path(comment.user.user_name), class: "image-rounded float-left m-r-15" %>
+        <strong><%= link_to comment.user.user_name, profile_path(comment.user.user_name), class: "text-dark" %></strong>
+        <%= comment.comment %>
+        <p class="text-muted m-l-30"><%= time_ago_in_words comment.created_at %> ago</p>
     </div>
-    <%= comment.comment %>
 <% end %>

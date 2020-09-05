@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+    before_action :authenticate_user!
+    before_action :set_post, only: [:show]
 
     def new
         @post = Post.new
@@ -15,10 +17,19 @@ class PostsController < ApplicationController
     end
 
     def show
+        @comment = Comment.new
+        @comments = Comment.includes(:user).where(post_id: @post.id)
     end
 
     private
+
+    def set_post
+        @post = Post.find(params[:id]) if params[:id].present?
+    end
+    
+
     def post_params
         params.require(:post).permit(:image, :description)
     end
+
 end
